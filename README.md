@@ -6,7 +6,7 @@ European option pricing in Python, built step by step and tested against theory.
 
 - [x] Black-Scholes-Merton prices and Greeks (delta, gamma, vega, theta, rho), with a dividend yield
 - [x] Binomial tree (Cox-Ross-Rubinstein), European and American
-- [ ] Monte Carlo pricer
+- [x] Monte Carlo: European and Asian options, with standard errors and antithetic variates
 - [ ] Implied volatility and a volatility smile from real option prices
 
 ## Example
@@ -21,6 +21,11 @@ from pricer import binomial as tree
 
 # American put: worth more than the European put (4.076) because early exercise can pay
 tree.price(S=50, K=50, T=5/12, r=0.10, sigma=0.40, kind="put", steps=500, american=True)   # 4.283
+
+from pricer import monte_carlo as mc
+
+mc.european(S=42, K=40, T=0.5, r=0.10, sigma=0.20, seed=0)         # 4.761, standard error 0.008
+mc.asian(S=42, K=40, T=0.5, r=0.10, sigma=0.20, steps=6, seed=0)   # call on the average of 6 monthly prices: about 3.49
 ```
 
 ## Tests
@@ -33,3 +38,4 @@ The tests check:
 
 - **Black-Scholes:** the price against a worked example in Hull's *Options, Futures and Other Derivatives*, put-call parity and no-arbitrage bounds, and every Greek against a bump-and-reprice finite difference.
 - **Binomial tree:** Hull's American put example (4.49 with 5 steps, 4.283 with 500), convergence to Black-Scholes for European options, exact put-call parity, and the early-exercise rules: never early for a call without dividends, sometimes early for a call with dividends, and immediately for a deep in-the-money put.
+- **Monte Carlo:** European prices within 4 standard errors of Black-Scholes, the error halving with 4x the paths, antithetic variates reducing it, simulated paths reproducing the exact price of a geometric-average Asian option, and an arithmetic Asian call worth more than the geometric one but less than the European.
