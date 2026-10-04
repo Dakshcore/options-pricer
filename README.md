@@ -1,5 +1,7 @@
 # Options Pricer
 
+[![tests](https://github.com/Dakshcore/options-pricer/actions/workflows/tests.yml/badge.svg)](https://github.com/Dakshcore/options-pricer/actions/workflows/tests.yml)
+
 Option pricing in Python, built from first principles and tested against theory: Black-Scholes-Merton with the Greeks, a binomial tree for American options, Monte Carlo simulation with variance reduction, and an implied volatility solver applied to real NIFTY option prices from NSE.
 
 ![NIFTY implied volatility smile](nifty_smile.png)
@@ -91,3 +93,7 @@ The file is cached in `data/` and not committed. If NSE's server refuses the aut
 
 - John C. Hull, *Options, Futures, and Other Derivatives*, for the worked Black-Scholes and American put examples used in the tests.
 - NSE's F&O bhavcopy archive: `https://nsearchives.nseindia.com/content/fo/BhavCopy_NSE_FO_0_0_0_YYYYMMDD_F_0000.csv.zip`
+
+## Licence
+
+MIT. See [LICENSE](LICENSE).
